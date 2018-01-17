@@ -16,7 +16,7 @@ import urllib3
 
 
 cl = LINETCR.LINE() #Bot Utama
-cl.login(token="EngoffDSv6Domioqo6Md.AaRklDERafMmmw4gJp8JRq.273iqdHQ1E9BNLu6vST408CNW4nlD2vVRHVuPn7s1rg=")
+cl.login(token="Eo8AjrcumK1lr3Wkdg4a.O5l+/QmuY6G/wgyx2fh9EG.TIqIcIxIENo3GSAcd8NTNrcqxYyuhOGnIjwYZWMH+ws=")
 cl.loginResult()
 
 ki = kk = kc = cl 
@@ -37,6 +37,10 @@ helpMessage ="""
 ╔═════════════════════
 ║♅ SkyLine Team Bots ♅
 ╠═════════════════════
+║[►] /me
+║[►] /gcreator
+║[►] /steal home
+║[►] /steal dp
 ║[►] /youtube
 ║[►] /creator
 ║[►] /apakah
@@ -49,9 +53,20 @@ helpMessage ="""
 ║[►] /say-id
 ║[►] /say-en
 ║[►] /version
-║[►] /cek
-║[►] /read
-║[►] /musik
+║[►] /cctv
+║[►] /Intip
+║[►] /music
+║[►] /lirik
+║[►] /tagall
+║[►] /getqr
+║[►] /setview
+║[►] /viewseen
+║[►] /kedapkedip
+║[►] /hay
+║[►] /set
+║[►] /check
+║[►] /instagram
+║[►] /respon
 ╚═════════════════════
 ╔═════════════════════
 ║List Keyword Admin
@@ -62,7 +77,7 @@ helpMessage ="""
 ╚═════════════════════
 """
 
-helpMessage ="""
+AdminMessage ="""
 ╔═════════════════════
 ╠═════════════════════
 ║List Keyword Admin
@@ -73,19 +88,14 @@ helpMessage ="""
 ╠═════════════════════
 ║[►] Admin add @
 ║[►] Admin remove @
-║[►] 
-║[►] /love
-║[►] /quotes
-║[►] /cek
-║[►] /wiki-id
-║[►] /wiki-en
-║[►] /Gcreator
-║[►] /say-id
-║[►] /say-en
-║[►] /version
-║[►] /cek
-║[►] /read
-║[►] /musik
+║[►] Guest on\off
+║[►] Qr on\off
+║[►] Mad on\off
+║[►] /gbc
+║[►] /cbc
+║[►] Glist
+║[►] Adminlist
+║[►] /bc:
 ╚═════════════════════
 ╔═════════════════════
 ╠═════════════════════
@@ -100,8 +110,8 @@ Bmid = kk.getProfile().mid
 Cmid = kc.getProfile().mid
 
 Bots=[mid,Amid,Bmid,Cmid]
-admin=["ub76a0153a283da9a1443dfb043181335"]
-creator=["ub76a0153a283da9a1443dfb043181335"]
+admin=["uc77fd25b59f6e563d84f1334f3fed10b"]
+creator=["uc77fd25b59f6e563d84f1334f3fed10b"]
 wait = {
     'contact':False,
     'autoJoin':True,
@@ -718,9 +728,11 @@ def bot(op):
 					else:
 						cl.sendText(msg.to,helpt)
             elif msg.text in ["Admin menu"]:
+				if msg.from_ in admin:
 					if wait["lang"] == "JP":
 						cl.sendText(msg.to,AdminMessage)
 					else:
+						cl.sendText(msg.to,"Khusus Admin")
 						cl.sendText(msg.to,helpt)
             elif ("Gn " in msg.text):
 				if msg.from_ in admin:
@@ -1050,7 +1062,7 @@ def bot(op):
             elif "Id" == msg.text:
 				if msg.from_ in admin:
 					cl.sendText(msg.to,msg.to)
-            elif msg.text in ["Me"]:
+            elif msg.text in ["/me"]:
 	                msg.contentType = 13
 	                msg.contentMetadata = {'mid': msg.from_}
 	                cl.sendMessage(msg)
@@ -1574,7 +1586,7 @@ def bot(op):
             elif msg.text in ["Comment","Ã§â€¢â„¢Ã¨Â¨â‚¬Ã§Â¢ÂºÃ¨ÂªÂ„1¤7"]:
 				if msg.from_ in admin:
 					cl.sendText(msg.to,"message changed to\n\n" + str(wait["comment"]))
-            elif msg.text in ["Getqr"]:
+            elif msg.text in ["/getqr"]:
 					if msg.toType == 2:
 						x = cl.getGroup(msg.to)
 						if x.preventJoinByTicket == True:
@@ -1711,9 +1723,49 @@ def bot(op):
                         cl.sendText(msg.to, "People who readed %s\nthat's it\n\nPeople who have ignored reads\n%sIt is abnormal 7¬8\n\nReading point creation date n time:\n[%s]"  % (wait2['readMember'][msg.to],chiya,setTime[msg.to]))
                     else:
                         cl.sendText(msg.to, "An already read point has not been set.\n¡¸set¡¹you can send 7¬8 read point will be created 7¬8")
+
+            elif msg.text == "/cctv":
+                    cl.sendText(msg.to, "Lurking Is Starting!! "+ datetime.today().strftime('%H:%M:%S'))
+                    try:
+                        del wait2['readPoint'][msg.to]
+                        del wait2['readMember'][msg.to]
+                    except:
+                        pass
+                    now2 = datetime.now()
+                    wait2['readPoint'][msg.to] = msg.id
+                    wait2['readMember'][msg.to] = ""
+                    wait2['ROM'][msg.to] = {}
+                    wait2['setTime'][msg.to] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+                    print wait2
+
+            elif msg.text in ["/intip"]:
+                 if msg.toType == 2:
+                    print "\nRead aktif..."
+                    if msg.to in wait2['readPoint']:
+                        if wait2["ROM"][msg.to].items() == []:
+                            chiya = ""
+                        else:
+                            chiya = ""
+                            for rom in wait2["ROM"][msg.to].items():
+                                print rom
+                                chiya += rom[1] + "\n"
+                        cl.sendText(msg.to, "Sider :\n  ===========================                     %s\n===========================\n\nReader :\n%s\n===========================\nIn the last seen point:\n[%s]\n===========================" % (wait2['readMember'][msg.to],chiya,setTime[msg.to]))
+                        print "\nReading Point Set..."
+                        try:
+                            del wait2['readPoint'][msg.to]
+                            del wait2['readMember'][msg.to]
+                        except:
+                            pass
+                        wait2['readPoint'][msg.to] = msg.id
+                        wait2['readMember'][msg.to] = ""
+                        wait2['setTime'][msg.to] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+                        wait2['ROM'][msg.to] = {}
+                        print "lukers"
+                        cl.sendText(msg.to, "Auto Read Point!!" + (wait2['setTime'][msg.to]))
+                    else:
+                        cl.sendText(msg.to, "Ketik [Lurking] for [Lurkers]")
 #-----------------------------------------------
-            elif msg.text in ["Tagall"]:
-              if msg.from_ in admin:
+            elif msg.text in ["/tagall"]:
                 group = cl.getGroup(msg.to)
                 nama = [contact.mid for contact in group.members]
                 cb = ""
@@ -2021,6 +2073,8 @@ def bot(op):
             elif msg.text in [".test"]:
 				if msg.from_ in admin:
 					cl.sendText(msg.to,"Hadir Boss Qu!!")
+            elif msg.text in ["/version"]:
+					cl.sendText(msg.to,"╔═══════════════════\n║╔══════════════════\n║╠❂➣BOT VERSION V2.3.5\n║╚══════════════════\n╚═══════════════════")
 #-----------------------------------------------
             elif "/say " in msg.text:
 					bctxt = msg.text.replace("/say ","")
@@ -2343,8 +2397,7 @@ def bot(op):
 #----------------------------------------------------------------------------
 #--------------------------------- INSTAGRAM --------------------------------
 #-------------------------[Anu]---------------------------------
-            elif "bokep" in msg.text:
-            	if msg.from_ in admin:
+            elif "/bokep" in msg.text:
                     cl.sendText(msg.to,"nekopoi.host")
                     cl.sendText(msg.to,"sexvideobokep.com")
                     cl.sendText(msg.to,"memek.com")
@@ -2378,7 +2431,7 @@ def bot(op):
 #--------------------------------- INSTAGRAM --------------------------------
             elif '/instagram ' in msg.text.lower():
                 try:
-                    instagram = msg.text.lower().replace(".instagram ","")
+                    instagram = msg.text.lower().replace("/instagram ","")
                     html = requests.get('https://www.instagram.com/' + instagram + '/?')
                     soup = BeautifulSoup(html.text, 'html5lib')
                     data = soup.find_all('meta', attrs={'property':'og:description'})
@@ -2849,12 +2902,12 @@ def bot(op):
                         cl.sendImageWithURL(msg.to,cover)
 #--------------------------CEK SIDER------------------------------
 
-            elif "setview" in msg.text:
+            elif "/setview" in msg.text:
                 subprocess.Popen("echo '' > dataSeen/"+msg.to+".txt", shell=True, stdout=subprocess.PIPE)
                 cl.sendText(msg.to, "Checkpoint checked!")
                 print "@setview"
 
-            elif "viewseen" in msg.text:
+            elif "/viewseen" in msg.text:
 	        lurkGroup = ""
 	        dataResult, timeSeen, contacts, userList, timelist, recheckData = [], [], [], [], [], []
                 with open('dataSeen/'+msg.to+'.txt','r') as rr:
@@ -3011,24 +3064,409 @@ def bot(op):
 					kk.sendText(msg.to,"Jangan nakal ok!")
 #-----------------------------------------------
 #--------------------------------- DUGEM ------------------------------------
-            elif ".kedapkedip " in msg.text.lower():
-                txt = msg.text.replace(".kedapkedip ", "")
+            elif "/kedapkedip " in msg.text.lower():
+                txt = msg.text.replace("/kedapkedip ", "")
                 cl.kedapkedip(msg.to,txt)
                 print "[Command] Kedapkedip"
 #--------------------------------------------------------------------------
-            elif "Hay @" in msg.text:
-                _name = msg.text.replace("Hay @","")
+            elif "/hay @" in msg.text:
+                _name = msg.text.replace("/hay @","")
                 _nametarget = _name.rstrip(' ')
                 gs = cl.getGroup(msg.to)
                 for g in gs.members:
                     if _nametarget == g.displayName:
                        cl.sendText(g.mid,"Your Account Has Been Spammed !")
-                       ki.sendText(g.mid,"Your Account Has Been Spammed !")  
-                       kk.sendText(g.mid,"Your Account Has Been Spammed !")  
-                       kc.sendText(g.mid,"Your Account Has Been Spammed !")
                        cl.sendText(g.mid,"Your Account Has Been Spammed !")  
                        cl.sendText(g.mid,"Your Account Has Been Spammed !")  
-                       ki.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")  
+                       cl.sendText(g.mid,"Your Account Has Been Spammed !")
                        cl.sendText(msg.to, "Done")
                        print " Spammed !"
 #---------------------------- SPAM CHAT -------------------------------------
@@ -3041,9 +3479,9 @@ def bot(op):
                         for x in range(jmlh):
                             cl.sendText(msg.to,teks)
 #-------------------------------------------------
-            elif '.wiki-id ' in msg.text.lower():
+            elif '/wiki-id ' in msg.text.lower():
                   try:
-                      wiki = msg.text.lower().replace(".wiki-id ","")
+                      wiki = msg.text.lower().replace("/wiki-id ","")
                       wikipedia.set_lang("id")
                       wiki = WikiApi({'locale':'id'})
                       results = wiki.find("search")
@@ -3062,9 +3500,9 @@ def bot(op):
                           except Exception as e:
                               cl.sendText(msg.to, str(e))                             
  #-------------------------------------------------
-            elif '.wiki-en ' in msg.text.lower():
+            elif '/wiki-en ' in msg.text.lower():
                   try:
-                      wiki = msg.text.lower().replace(".wiki-en ","")
+                      wiki = msg.text.lower().replace("/wiki-en ","")
                       wikipedia.set_lang("en")
                       wiki = WikiApi({'locale':'en'})
                       results = wiki.find("search")
@@ -3083,11 +3521,11 @@ def bot(op):
                           except Exception as e:
                               cl.sendText(msg.to, str(e))
 #-----------------------------------------------------------------  
-            elif ".botadd @" in msg.text:
+            elif "Bot add @" in msg.text:
               if msg.toType == 2:
                 if msg.from_ in admin:
                   print "[Command]Add executing"
-                  _name = msg.text.replace(".botadd @","")
+                  _name = msg.text.replace("Bot add @","")
                   _nametarget = _name.rstrip('  ')
                   gs = cl.getGroup(msg.to)
                   gs = ki.getGroup(msg.to)
@@ -3119,10 +3557,21 @@ def bot(op):
 				kc.sendText(msg.to,"Kecepatan Internet Anda Sangat Jelek Mohon Ganti SimCard Atau HP Anda")
 				ki.sendText(msg.to,"wkwkw Canda Anjir Gitu Aja Baper")
 #-----------------------------------------------
-            elif msg.text in [".res",".respon"]:
-				if msg.from_ in admin:
-					ki.sendText(msg.to,"Vanny Hadir ")
-					kk.sendText(msg.to,"Vanny Selalu Ada Untuk Kakak Ngak Kayak Mantan :v")
+            elif msg.text in [".res","/respon"]:
+					cl.sendText(msg.to,"★")
+					cl.sendText(msg.to,"★★")
+					cl.sendText(msg.to,"★★★")
+					cl.sendText(msg.to,"★★★★")
+					cl.sendText(msg.to,"★★★★★")
+					cl.sendText(msg.to,"★★★★★★")
+					cl.sendText(msg.to,"★★★★★★★")
+					cl.sendText(msg.to,"★★★★★★★★")
+					cl.sendText(msg.to,"★★★★★★★★★")
+					cl.sendText(msg.to,"★★★★★★★★★★")
+					cl.sendText(msg.to,"★★★★★★★★★★★")
+					cl.sendText(msg.to,"★★★★★★★★★★★★")
+					cl.sendText(msg.to,"★★★★★★★★★★★★★")
+					cl.sendText(msg.to,"Sudah Hadir Bossque :v Padahal Cuman 1")
 #-------------------------------------------------
             elif "/say-id " in msg.text:
                 say = msg.text.replace("/say-id ","")
@@ -3139,9 +3588,9 @@ def bot(op):
                 tts.save("hasil.mp3")
                 cl.sendAudio(msg.to,"hasil.mp3")
 #------------------------------------------------
-            elif "Mid @" in msg.text:
+            elif "/mid @" in msg.text:
             	if msg.from_ in admin:
-                  _name = msg.text.replace("Mid @","")
+                  _name = msg.text.replace("/mid @","")
                   _nametarget = _name.rstrip(' ')
                   gs = cl.getGroup(msg.to)
                   for g in gs.members:
@@ -3151,7 +3600,7 @@ def bot(op):
                           pass
 #--------------------------------------------------
 #--------------------------CEK SIDER------------------------------            
-            if msg.text.lower() in [".set"]:
+            if msg.text.lower() in ["/set"]:
                 if msg.toType == 2:
                     cl.sendText(msg.to, "Sini Muncul")
                     try:
@@ -3165,7 +3614,7 @@ def bot(op):
                     wait2['ROM'][msg.to] = {}
                     print "[Command] Set"
 
-            if msg.text.lower() in [".check"]:
+            if msg.text.lower() in ["/check"]:
                 if msg.toType == 2:
                     if msg.to in wait2['readPoint']:
                         if wait2["ROM"][msg.to].items() == []:
@@ -3190,11 +3639,11 @@ def bot(op):
                         cl.sendText(msg.to,"Read point tidak tersedia, Silahkan ketik /set untuk membuat Read point.")
 #----------------------------------------------------------------------------
 #--------------------------------------------------------
-	        elif ".bc: " in msg.text:
-		        bc = msg.text.replace(".bc: ","")
+	        elif "/bc: " in msg.text:
+		        bc = msg.text.replace("/bc: ","")
 		        gid = cl.getGroupIdsJoined()
 		        for i in gid:
-		          cl.sendText(i,"=======[BROADCAST]=======\n\n"+bc+"\n\nSorryBC")
+		          cl.sendText(i,"╔════════════════════════\n║╠❂➣BROADCAST╚════════════════════════\n\n"+bc+"\n\nSorryBC")
 		          cl.sendText(msg.to,"Success BC BosQ")
 #---------------------------------------
             elif ".say " in msg.text.lower():
@@ -3208,12 +3657,10 @@ def bot(op):
                         cl.sendAudio(msg.to, mp3)
 #--------------------------------------------------------
             elif msg.text in ["Sp","Speed",".sp"]:
-				if msg.from_ in admin:
 					start = time.time()
 					cl.sendText(msg.to, "Lagi Proses...")
-					cl.sendText(msg.to, "Tunggu Sebentar Sabar Dikit Lah...")
+					cl.sendText(msg.to, "Sedang Menghitung")
 					elapsed_time = time.time() - start
-					cl.sendText(msg.to, "%s/Detik" % (elapsed_time))
 					cl.sendText(msg.to, "%s/Detik" % (elapsed_time))
 #------------------------------------------------------------------
             elif msg.text in ["Clearban"]:
@@ -3332,9 +3779,9 @@ def autolike():
           try:    
             #-----------------------------[JANGAN DIEDIT - Hargai Saya]-----------------------------#
             cl.like(hasil['result']['posts'][zx]['userInfo']['mid'],hasil['result']['posts'][zx]['postInfo']['postId'],likeType=1002)
-            cl.comment(hasil['result']['posts'][zx]['userInfo']['mid'],hasil['result']['posts'][zx]['postInfo']['postId'],"Autolike By Syams - 255\n\nSubscribe Channel Saya\n»» Youtube.com/c/SYAMSPlayMC")
+            cl.comment(hasil['result']['posts'][zx]['userInfo']['mid'],hasil['result']['posts'][zx]['postInfo']['postId'],"Autolike line.me/ti/p/@enr7503k")
             #-----------------------------[JANGAN DIEDIT - Hargai Saya]-----------------------------#
-            cl.comment(hasil['result']['posts'][zx]['userInfo']['mid'],hasil['result']['posts'][zx]['postInfo']['postId'],"Auto Like By Vanny\n\nSubscribe Channel Saya\n»» Youtube.com/c/SYAMSPlayMC")
+            cl.comment(hasil['result']['posts'][zx]['userInfo']['mid'],hasil['result']['posts'][zx]['postInfo']['postId'],"Auto Like Autolike line.me/ti/p/@enr7503k")
             print "Like"
           except:
             pass
